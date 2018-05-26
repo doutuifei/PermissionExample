@@ -99,7 +99,11 @@ dependencies {
 ```
 
 ## Dailog说明
+
 1. RationaleDialog：申请权限的说明。
+
+![RationaleDialog](http://p7rrs468p.bkt.clouddn.com/Rationale%20Dialog.png)
+
 ```
 EasyPermissions.requestPermissions(context, PERMISSION_STORAGE_MSG, PERMISSION_STORAGE_CODE, PERMISSION_STORAGE);
 ```
@@ -134,11 +138,13 @@ EasyPermissions.requestPermissions(
     public void onRationaleDenied(int requestCode) {
     }
 ```
-![RationaleDialog](http://p7rrs468p.bkt.clouddn.com/Rationale%20Dialog.png)
 
 详细使用参考：[easypermissions](https://github.com/googlesamples/easypermissions)
 
 2. AppSettingsDialog:跳转setting页，申请被拒绝时使用。
+
+![AppSettingsDialog](http://p7rrs468p.bkt.clouddn.com/AppSettingsDialog.png)
+
 ```
  /**
      * 拒绝权限
@@ -179,7 +185,6 @@ EasyPermissions.requestPermissions(
             }
         }
 ```
-![AppSettingsDialog](http://p7rrs468p.bkt.clouddn.com/AppSettingsDialog.png)
 
 ## 国产ROM适配
 国产ROM问题一直是最多的，申请权限的弹窗不按Android原生来，有时候允许权限了，回调却是走失败。
