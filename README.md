@@ -96,5 +96,85 @@ dependencies {
     }
 ```
 
+## Dailog说明
+1. RationaleDialog：申请权限的说明。
+```
+EasyPermissions.requestPermissions(context, PERMISSION_STORAGE_MSG, PERMISSION_STORAGE_CODE, PERMISSION_STORAGE);
+```
+或者
+```
+EasyPermissions.requestPermissions(
+        new PermissionRequest.Builder(this, RC_CAMERA_AND_LOCATION, perms)
+                .setRationale(R.string.camera_and_location_rationale)
+                .setPositiveButtonText(R.string.rationale_ask_ok)
+                .setNegativeButtonText(R.string.rationale_ask_cancel)
+                .setTheme(R.style.my_fancy_style)
+                .build());
+```
 
-## easypermissions方法说明
+方法回调实现```EasyPermissions.RationaleCallbacks```接口:
+```
+   /**
+     * dialog提醒点击“确定”
+     *
+     * @param requestCode
+     */
+    @Override
+    public void onRationaleAccepted(int requestCode) {
+    }
+
+    /**
+     * dialog提醒点击“取消”
+     *
+     * @param requestCode
+     */
+    @Override
+    public void onRationaleDenied(int requestCode) {
+    }
+```
+![RationaleDialog](http://p7rrs468p.bkt.clouddn.com/Rationale%20Dialog.png)
+
+详细使用参考：[easypermissions](https://github.com/googlesamples/easypermissions)
+
+2. AppSettingsDialog:跳转setting页，申请被拒绝时使用。
+```
+ /**
+     * 拒绝权限
+     *
+     * @param requestCode
+     * @param perms
+     */
+    @Override
+    public void onPermissionsDenied(int requestCode, @NonNull List<String> perms) {
+        if (EasyPermissions.somePermissionPermanentlyDenied(this, perms)) {
+            new AppSettingsDialog.Builder(this)
+                    .setTitle("提醒")
+                    .setRationale("此app需要这些权限才能正常使用")
+                    .build()
+                    .show();
+        }
+    }
+```
+方法回调
+```
+/**
+       /**
+         * 设置页面回调
+         *
+         * @param requestCode
+         * @param resultCode
+         * @param data
+         */
+        @Override
+        public void onActivityResult(int requestCode, int resultCode, Intent data) {
+            super.onActivityResult(requestCode, resultCode, data);
+            if (requestCode == AppSettingsDialog.DEFAULT_SETTINGS_REQ_CODE) {
+                if (PermissionUtils.hasStoragePermission(context)){
+                    //有权限
+                }else{
+                    //没有权限
+                }
+            }
+        }
+```
+
