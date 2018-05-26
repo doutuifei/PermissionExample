@@ -8,25 +8,27 @@
 * 申请时，默认是没有权限的。
 * 流程图中长方形中为方法名。
 
-## 申请单个权限流程图
+## 流程图
+### 申请单个权限流程图
+
 ![img](https://github.com/mzyq/PermissionExample/blob/a5ccdc5254de9940aacd646fb1af024058480180/doc/simple.jpg)
 
 [PDF版](https://github.com/mzyq/PermissionExample/blob/a5ccdc5254de9940aacd646fb1af024058480180/doc/simple.pdf)
 
 [visio版](https://github.com/mzyq/PermissionExample/blob/a5ccdc5254de9940aacd646fb1af024058480180/doc/simple.vsdx)
 
-## 申请权限组流程图
+### 申请权限组流程图
 ![img](https://github.com/mzyq/PermissionExample/blob/a5ccdc5254de9940aacd646fb1af024058480180/doc/group.jpg)
 
 [PDF版](https://github.com/mzyq/PermissionExample/blob/a5ccdc5254de9940aacd646fb1af024058480180/doc/group.pdf)
 
 [visio版](https://github.com/mzyq/PermissionExample/blob/a5ccdc5254de9940aacd646fb1af024058480180/doc/group.vsdx)
 
-## 申请混合权限（单个权限+权限组）流程图
+### 申请混合权限（单个权限+权限组）流程图
 > 具体流程=单个权限流程图+权限组流程图
 代码中有例子，就不详细说明了。
 
-## easypermissions使用
+## EasyPermissions使用
 
 [easypermissions](https://github.com/googlesamples/easypermissions)
 
