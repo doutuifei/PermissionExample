@@ -1,4 +1,4 @@
-# easypermissions示例 带流程图
+# Android权限适配（带流程图）
 
 ## 前言
 阅读前说明：
@@ -180,3 +180,52 @@ EasyPermissions.requestPermissions(
         }
 ```
 
+## 国产ROM适配
+国产ROM问题一直是最多的，申请权限的弹窗不按Android原生来，有时候允许权限了，回调却是走失败。
+如果想适配国产ROM，我推荐 [AndPermission](https://github.com/yanzhenjie/AndPermission)
+
+### AndPermission概述
+AndPermission可以简化在Android上请求权限的流程。
+
+* 在Android6.0或者更高版本的系统中请求运行时权限。
+* 在Android7.0或者更高版本的系统中分享私有文件。
+* 在Android8.0或者更高版本的系统中安装Apk文件。
+
+### 请求流程
+为了兼容一些特殊中国产手机，AndPermission请求权限的流程是这样的：
+```
+                      发起请求
+                         │
+              调用SDK Api判断是否有权限
+                         │
+           ┌─────────────┴─────────────┐
+         有权限                      没权限
+           │                           │
+           │                  使用SDK Api请求权限
+           │                           │
+           │                    用户授权或者拒绝
+           └─────────────┬─────────────┘
+                  执行权限相关代码
+                 ┌───────┴───────┐
+                正常            异常
+                 │               │
+             onGranted()      onDenied()
+          ┌──────┴──────┐        │
+         正常          异常───────┘
+```
+### 申请流程的释义
+可以看出AndPermission的申请流程和标准的申请流程大相径庭，这样做主要是因为以下几点原因。
+
+* 兼容Android5.0的系统判断是否有权限。
+* 部分设备上使用SDK的Api判断是否有权限时，无论是否有权限都返回true。
+* 部分设备上无论用户点击同意还是拒绝都返回true。
+* 部分设备在申请权限时并不会弹出授权Dialog，而是在执行权限相关代码时才会弹出授权Dialog。
+
+##### 特特特别注意：
+ 因为部分权限（例如发送短信、打电话、接听/挂断电话等），AndPermission不能执行权限相关代码做测试，所以对于这一类权限在执行权限相关代码步骤仅仅使用了AppOpsManager做检测。因为极少部分国产机总是返回true，因此直接回调到onGranted()中让开发者执行相关代码来辅助AndPermission的整个流程，如果onGranted()方法发生异常，那么则认为是没有权限，所以重新回调到onDenied()方法中，如果onGranted()方法正常执行那么则认为有权限。这样一来刚好是一个完整的流程，也可以最大限度的兼容到更多异常的手机。
+
+回调onGranted()时AndPermission对onGranted()方法做了try catch。这样做可以保证两点，第一点是防止部分手机返回错误状态时回调了onGranted()后的崩溃，第二点是防止部分手机需要真正执行权限相关代码时触发授权Dialog后被用户拒绝后的崩溃。而这两点都是没有权限，因此会重新回调到onDenied()中让开发者处理没权限的情况。
+
+#### 综上所述，如果onGranted()和onDenied()方法都被调用了，说明开发者的onGranted()方法发生了异常。
+
+[AndPermission详细说明文档](http://www.yanzhenjie.com/AndPermission/cn/)
