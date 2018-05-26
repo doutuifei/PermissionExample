@@ -1,4 +1,4 @@
-# Android权限适配（带流程图）
+# EasyPermissions Android权限适配（带流程图）
 
 ## 前言
 阅读前说明：
@@ -179,6 +179,7 @@ EasyPermissions.requestPermissions(
             }
         }
 ```
+![AppSettingsDialog](http://p7rrs468p.bkt.clouddn.com/AppSettingsDialog.png)
 
 ## 国产ROM适配
 国产ROM问题一直是最多的，申请权限的弹窗不按Android原生来，有时候允许权限了，回调却是走失败。
