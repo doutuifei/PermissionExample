@@ -1,19 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
     <Button
-        android:id="@+id/btn_sd"
-        android:layout_width="wrap_content"
+        android:id="@+id/btn_simple"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="申请权限"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:text="申请单个权限" />
 
-</android.support.constraint.ConstraintLayout>
+    <Button
+        android:id="@+id/btn_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="申请权限组" />
+
+    <Button
+        android:id="@+id/btn_mix"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="申请混合权限" />
+
+</LinearLayout>

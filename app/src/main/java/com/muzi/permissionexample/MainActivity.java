@@ -6,7 +6,6 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 
 import java.util.List;
 
@@ -18,30 +17,40 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
         EasyPermissions.RationaleCallbacks {
 
     private MainActivity context = MainActivity.this;
-    private Button btnsd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        btnsd = findViewById(R.id.btn_sd);
-        btnsd.setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.btn_simple).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                initPermission();
+                initSimple();
             }
         });
+
+        findViewById(R.id.btn_group).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                initGroup();
+            }
+        });
+
+        findViewById(R.id.btn_mix).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                initMix();
+            }
+        });
+
     }
 
-    private void initPermission() {
-        initStorage();
-    }
 
     /**
      * 申请SD卡权限
      */
     @AfterPermissionGranted(PermissionUtils.PERMISSION_STORAGE_CODE)
-    public void initStorage() {
+    public void initSimple() {
         if (PermissionUtils.hasStoragePermission(context)) {
             //有权限
         } else {
@@ -49,6 +58,33 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
             EasyPermissions.requestPermissions(context, PermissionUtils.PERMISSION_STORAGE_MSG, PermissionUtils.PERMISSION_STORAGE_CODE, PermissionUtils.PERMISSION_STORAGE);
         }
     }
+
+    /**
+     * 申请定位组权限
+     */
+    @AfterPermissionGranted(PermissionUtils.PERMISSION_LOCATION_CODE)
+    public void initGroup() {
+        if (PermissionUtils.hasStoragePermission(context)) {
+            //有权限
+        } else {
+            //申请权限
+            EasyPermissions.requestPermissions(context, PermissionUtils.PERMISSION_LOCATION_MSG, PermissionUtils.PERMISSION_LOCATION_CODE, PermissionUtils.PERMISSION_LOCATION);
+        }
+    }
+
+    /**
+     * 申请定位组权限
+     */
+    @AfterPermissionGranted(PermissionUtils.PERMISSION_MIX_CODE)
+    public void initMix() {
+        if (PermissionUtils.hasStoragePermission(context)) {
+            //有权限
+        } else {
+            //申请权限
+            EasyPermissions.requestPermissions(context, PermissionUtils.PERMISSION_MIX_MSG, PermissionUtils.PERMISSION_MIX_CODE, PermissionUtils.PERMISSION_MIX);
+        }
+    }
+
 
     /**
      * 同意权限
