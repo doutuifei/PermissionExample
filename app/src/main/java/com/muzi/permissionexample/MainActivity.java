@@ -159,6 +159,11 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == AppSettingsDialog.DEFAULT_SETTINGS_REQ_CODE) {
             Log.d("PermissionLog", "onActivityResult:" + PermissionUtils.hasStoragePermission(context));
+            if (PermissionUtils.hasStoragePermission(context)){
+                //有权限
+            }else{
+                //没有权限
+            }
         }
     }
 
